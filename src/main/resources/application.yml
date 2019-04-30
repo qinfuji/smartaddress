@@ -1,0 +1,36 @@
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+
+#公共配置与profiles选择无关
+mybatis:
+  type-aliases-package: com.smartaddress.demo.model
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+
+freemarker:
+  allow-request-override: false
+  cache: true
+  check-template-location: true
+  charset: UTF-8
+  content-type: text/html
+  expose-request-attributes: false
+  expose-session-attributes: false
+  expose-spring-macro-helpers: false
+  suffix: .ftl
+  template-loader-path: classpath:/templates/
+
+---
+
+#开发配置
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/smartaddress?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: qinxiyue2006
+    driver-class-name: com.mysql.cj.jdbc.Driver
