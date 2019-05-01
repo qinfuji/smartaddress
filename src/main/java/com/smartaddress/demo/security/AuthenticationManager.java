@@ -1,10 +1,9 @@
-package com.smartaddress.demo.server;
+package com.smartaddress.demo.security;
 
 import com.smartaddress.demo.utils.JwtHelper;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 
-import io.jsonwebtoken.Jwts;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ConditionalOnProperty(prefix = "jwt", name = "enable", havingValue = "true")
 @Component
 public class AuthenticationManager implements ReactiveAuthenticationManager {
 

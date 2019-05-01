@@ -1,8 +1,7 @@
-package com.smartaddress.demo.server;
+package com.smartaddress.demo.security;
 
 import com.alibaba.fastjson.JSONObject;
 import com.smartaddress.demo.utils.JwtHelper;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -18,21 +17,21 @@ public class JwtWebConfig implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain) {
-        ServerHttpRequest request=  serverWebExchange.getRequest();
-        if(request.getPath().value().contains("login")){
-            return webFilterChain.filter(serverWebExchange);
-        }
-        ServerHttpResponse response=serverWebExchange.getResponse();
-        String authorization=request.getHeaders().getFirst("Authoriszation");
-        if(authorization == null || ! authorization.startsWith("Bearer ")){
-            return this.setErrorResponse(response,"未携带token");
-        }
-        String token=authorization.substring(7);
-        try {
-            serverWebExchange.getAttributes().put("user", JwtHelper.parseJWT(token));
-        }catch(Exception e) {
-            return this.setErrorResponse(response,e.getMessage());
-        }
+//        ServerHttpRequest request=  serverWebExchange.getRequest();
+//        if(request.getPath().value().contains("login")){
+//            return webFilterChain.filter(serverWebExchange);
+//        }
+//        ServerHttpResponse response=serverWebExchange.getResponse();
+//        String authorization=request.getHeaders().getFirst("Authoriszation");
+//        if(authorization == null || ! authorization.startsWith("Bearer ")){
+//            return this.setErrorResponse(response,"未携带token");
+//        }
+//        String token=authorization.substring(7);
+//        try {
+//            serverWebExchange.getAttributes().put("user", JwtHelper.parseJWT(token));
+//        }catch(Exception e) {
+//            return this.setErrorResponse(response,e.getMessage());
+//        }
         return  webFilterChain.filter(serverWebExchange);
 
     }

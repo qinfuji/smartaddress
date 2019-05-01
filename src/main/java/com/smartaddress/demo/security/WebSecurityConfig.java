@@ -1,32 +1,29 @@
-package com.smartaddress.demo.server;
+package com.smartaddress.demo.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+@ConditionalOnProperty(prefix = "jwt", name = "enable", havingValue = "true")
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class WebSecurityConfig {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private SecurityContextRepository securityContextRepository;
+
     @Bean
-    public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http,
+                                                         AuthenticationManager authenticationManager,
+                                                         SecurityContextRepository securityContextRepository) {
         return http
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
+                .authenticationManager(authenticationManager)
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange()
-                .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                .pathMatchers("/user/login").permitAll()
-                .anyExchange().authenticated()
-                .and().build();
+                .pathMatchers("/auth/login").permitAll()
+                .anyExchange().authenticated().and().build();
     }
-
 }

@@ -24,6 +24,11 @@ freemarker:
   suffix: .ftl
   template-loader-path: classpath:/templates/
 
+jwt:
+  enable: true
+  secret-key: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
+  validity-milliseconds: 36000
+
 ---
 
 #开发配置
@@ -34,3 +39,9 @@ spring:
     username: root
     password: qinxiyue2006
     driver-class-name: com.mysql.cj.jdbc.Driver
+  logging:
+    level:
+      org.springframework: DEBUG
+      io.jsonwebtoken: DEBUG
+  server:
+      port: 8086
