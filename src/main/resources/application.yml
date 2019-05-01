@@ -1,11 +1,16 @@
 #默认使用配置
 spring:
+  main:
+    banner-mode: "off"
   profiles:
     active: dev
+  webflux:
+    static-path-pattern: /static/**
+
 
 #公共配置与profiles选择无关
 mybatis:
-  type-aliases-package: com.smartaddress.demo.model
+  type-aliases-package: com.smartaddress.demo.po
   mapper-locations: classpath:/mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
@@ -39,9 +44,25 @@ spring:
     username: root
     password: qinxiyue2006
     driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    org.springframework: ERROR
+    io.jsonwebtoken: DEBUG
+server:
+  port: 8086
+
+---
+
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://localhost:3306/smartaddress?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: qinxiyue2006
+    driver-class-name: com.mysql.cj.jdbc.Driver
   logging:
     level:
-      org.springframework: DEBUG
-      io.jsonwebtoken: DEBUG
-  server:
-      port: 8086
+      org.springframework: INFO
+      io.jsonwebtoken: INFO
+server:
+  port: 8080

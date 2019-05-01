@@ -17,7 +17,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.smartaddress.demo.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.smartaddress.demo.po" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>

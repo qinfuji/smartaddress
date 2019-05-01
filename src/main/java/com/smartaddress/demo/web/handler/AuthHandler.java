@@ -1,7 +1,7 @@
-package com.smartaddress.demo.handler;
+package com.smartaddress.demo.web.handler;
 
-import com.smartaddress.demo.mapper.UserMapper;
-import com.smartaddress.demo.vo.AuthResult;
+import com.smartaddress.demo.dao.UserMapper;
+import com.smartaddress.demo.vo.AuthTokenObject;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
@@ -14,8 +14,8 @@ public class AuthHandler {
         this.userMapper = userMapper;
     }
 
-    public Mono<AuthResult> login(String username , String password){
-         AuthResult result = new AuthResult("aaa" ,"bbb");
+    public Mono<AuthTokenObject> login(String username , String password){
+         AuthTokenObject result = new AuthTokenObject("aaa" ,"bbb");
          return Mono.create(authMonoSink-> authMonoSink.success(result));
     }
 }

@@ -1,7 +1,6 @@
-package com.smartaddress.demo.security;
+package com.smartaddress.demo.web.security;
 
 import com.alibaba.fastjson.JSONObject;
-import com.smartaddress.demo.utils.JwtHelper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +18,7 @@ public class JwtWebConfig implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain) {
         ServerHttpRequest request=  serverWebExchange.getRequest();
-        if(request.getPath().value().contains("login")){
+        if(request.getPath().value().contains("login") || request.getPath().value().contains("/static")){
             return webFilterChain.filter(serverWebExchange);
         }
         ServerHttpResponse response=serverWebExchange.getResponse();
@@ -39,7 +38,6 @@ public class JwtWebConfig implements WebFilter {
     protected Mono<Void> setErrorResponse(ServerHttpResponse response, String message){
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("status_code",500);
         jsonObject.put("data",message);
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         return response.writeWith(Mono.just(response.bufferFactory().wrap(jsonObject.toString().getBytes())));

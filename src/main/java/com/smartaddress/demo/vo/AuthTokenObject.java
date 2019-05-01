@@ -1,16 +1,16 @@
 package com.smartaddress.demo.vo;
 
-public class AuthResult {
+public class AuthTokenObject {
 
     public String username;
 
     public String token;
 
 
-    public AuthResult() {
+    public AuthTokenObject() {
     }
 
-    public AuthResult(String username, String token) {
+    public AuthTokenObject(String username, String token) {
         this.username = username;
         this.token = token;
     }

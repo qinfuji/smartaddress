@@ -1,7 +1,7 @@
-package com.smartaddress.demo.controller;
+package com.smartaddress.demo.web.controller;
 
-import com.smartaddress.demo.handler.AuthHandler;
-import com.smartaddress.demo.vo.AuthResult;
+import com.smartaddress.demo.web.handler.AuthHandler;
+import com.smartaddress.demo.vo.AuthTokenObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public class AuthController {
     private AuthHandler authHandler;
 
     @GetMapping("/login")
-    public Mono<AuthResult> login(@RequestParam String username , @RequestParam String password){
+    public Mono<AuthTokenObject> login(@RequestParam String username , @RequestParam String password){
         return authHandler.login(username , password);
     }
 

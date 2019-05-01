@@ -1,7 +1,7 @@
-package com.smartaddress.demo.handler;
+package com.smartaddress.demo.web.handler;
 
-import com.smartaddress.demo.mapper.UserMapper;
-import com.smartaddress.demo.model.User;
+import com.smartaddress.demo.dao.UserMapper;
+import com.smartaddress.demo.po.User;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
