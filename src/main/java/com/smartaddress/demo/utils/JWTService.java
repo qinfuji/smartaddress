@@ -1,4 +1,4 @@
-package com.smartaddress.demo.security;
+package com.smartaddress.demo.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
