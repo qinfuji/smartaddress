@@ -18,6 +18,11 @@ mybatis:
     default-fetch-size: 100
     default-statement-timeout: 30
 
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+  notEmpty: true
+
 pagehelper:
   help-dialect: mysql
   reasonable: true

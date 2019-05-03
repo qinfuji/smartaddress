@@ -1,11 +1,18 @@
 package com.smartaddress.demo.dao;
 
+import com.github.jsonzou.jmockdata.JMockData;
 import com.smartaddress.demo.TestBase;
 import com.smartaddress.demo.po.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import com.smartaddress.demo.po.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertNotNull;
 
 public class UserDaoTest extends TestBase {
@@ -25,25 +32,45 @@ public class UserDaoTest extends TestBase {
     @Test
     public void saveTest(){
         User user = new User();
-        user.setName("qinfuji");
-        user.setPassword("123123");
-        user.setStatus("111");
+        user.setName(JMockData.mock(String.class));
+        user.setPassword(JMockData.mock(String.class));
+        user.setStatus(User.STATUS_NORMAL);
         userDao.save(user);
         assertNotNull(user.getId());
     }
 
-    @Test
+    @Test(expected = DuplicateKeyException.class)
     public void saveTestSameNameException(){
         User user = new User();
         user.setName("qinfuji");
         user.setPassword("123123");
-        user.setStatus("111");
+        user.setStatus(User.STATUS_NORMAL);
         userDao.save(user);
         User user1 = new User();
         user1.setName("qinfuji");
         user1.setPassword("123123");
-        user1.setStatus("111");
+        user1.setStatus(User.STATUS_NORMAL);
         userDao.save(user1);
+    }
+
+    @Test
+    public void testBatchUser(){
+        List<User> userList = new ArrayList<>();
+        for(int i=0; i<40; i++){
+            User u = new User();
+            u.setName(JMockData.mock(String.class));
+            u.setStatus(User.STATUS_NORMAL);
+            u.setPassword(JMockData.mock(String.class));
+            userList.add(u);
+        }
+        userDao.batchSave(userList);
+        for(int i=0; i<userList.size(); i++){
+            assertNotNull(userList.get(i).getId());
+        }
+    }
+
+    public void testFindAll(){
+
     }
 
 }

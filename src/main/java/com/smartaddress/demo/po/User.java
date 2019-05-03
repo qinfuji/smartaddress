@@ -1,10 +1,22 @@
 package com.smartaddress.demo.po;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
+import tk.mybatis.mapper.annotation.Version;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name="user_t")
 public class User {
+
+
+    public final static int STATUS_DELETE = 2;
+    public final static int STATUS_NORMAL = 1;
 
     /**
      * id
      */
+    @Id
     private String id;
 
     /**
@@ -21,7 +33,11 @@ public class User {
     /**
      * 用户状态
      */
-    private String status;
+    private Integer status = 0;
+
+
+    @Version
+    private Integer version;
 
     public String getId() {
         return id;
@@ -47,12 +63,21 @@ public class User {
         this.password = password;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Override
@@ -60,7 +85,8 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", status='" + status + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

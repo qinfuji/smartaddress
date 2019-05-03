@@ -17,8 +17,23 @@
     </selectKey>
     insert into user_t (id, name, password, 
       status)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{status,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="batchSave">
+    <selectKey keyProperty="id" resultType="string" order="BEFORE">
+      select uuid() as id from dual
+    </selectKey>
+    insert into user_t
+    (<include refid="Base_Column_List"/>)
+    values 
+    <foreach collection="userList" item="item" index="index"  separator=",">
+      ( #{id , jdbcType=VARCHAR},
+        #{item.name,jdbcType=VARCHAR},
+        #{item.password,jdbcType=VARCHAR},
+        #{item.status,jdbcType=VARCHAR})
+    </foreach>
   </insert>
 
   <update id="update" parameterType="com.smartaddress.demo.po.User">
@@ -31,7 +46,6 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-
   <update id="deleteById" parameterType="string">
     update user_t
     status = 'deleted'
@@ -43,5 +57,18 @@
     password = #{password,jdbcType=VARCHAR},
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="findAll" resultMap="BaseResultMap" >
+    Select
+    <include refid="Base_Column_List"/>
+    from user_t where 1=1
+    <if test="qo != null and qo.name !=null and qo.name.length>0">
+       and name = ${qo.name}
+    </if>
+    <if test="qo != null and qo.status !=null and qo.status.length>0">
+      and status = ${qo.status}
+    </if>
+  </select>
 
 </mapper>

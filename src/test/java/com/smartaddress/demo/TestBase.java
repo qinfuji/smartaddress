@@ -1,6 +1,5 @@
 package com.smartaddress.demo;
 
-import com.smartaddress.demo.Application;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

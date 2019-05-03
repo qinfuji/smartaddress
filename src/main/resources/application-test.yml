@@ -30,7 +30,14 @@ spring:
     useGlobalDataSourceStat: true
   logging:
     level:
-      org.springframework: INFO
-      io.jsonwebtoken: INFO
+      org:
+        springframework: debug
+      io:
+        jsonwebtoken: INFO
+      com:
+        ibatis: debug
+        smartaddress:
+          dome:
+            dao: debug
 server:
   port: 8080

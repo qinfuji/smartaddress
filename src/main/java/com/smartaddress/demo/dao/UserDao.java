@@ -2,18 +2,42 @@ package com.smartaddress.demo.dao;
 
 import com.smartaddress.demo.po.User;
 import com.smartaddress.demo.qo.UserQO;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
+
 
 import java.util.List;
 
-@Mapper
-public interface UserDao {
+@org.apache.ibatis.annotations.Mapper
+public interface UserDao extends Mapper<User> {
 
     int deleteById(String id);
 
-    int save(User record);
+    /**
+     * 创建用户
+     * @param user
+     * @return
+     */
+    int save(User user);
 
-    int updateById(String id , User user);
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
+    int updateById( @Param("user") User user);
 
-    List<User> queryUser(UserQO qo);
+    /**
+     * 查询用户
+     * @param qo
+     * @return
+     */
+    List<User> findAll(@Param("qo") UserQO qo);
+
+    /**
+     * 批量创建用户
+     * @param userList
+     * @return
+     */
+    int batchSave(@Param("userList") List<User> userList);
 }
