@@ -6,16 +6,24 @@ spring:
     active: dev
   webflux:
     static-path-pattern: /static/**
-
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 #公共配置与profiles选择无关
 mybatis:
   type-aliases-package: com.smartaddress.demo.po
-  mapper-locations: classpath:/mybatis/mapper/*.xml
+  mapper-locations: classpath*:/mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
     default-fetch-size: 100
     default-statement-timeout: 30
+
+pagehelper:
+  help-dialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
 
 freemarker:
   allow-request-override: false
@@ -33,36 +41,3 @@ jwt:
   enable: true
   secret-key: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
   validity-milliseconds: 36000
-
----
-
-#开发配置
-spring:
-  profiles: dev
-  datasource:
-    url: jdbc:mysql://localhost:3306/smartaddress?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: qinxiyue2006
-    driver-class-name: com.mysql.cj.jdbc.Driver
-logging:
-  level:
-    org.springframework: ERROR
-    io.jsonwebtoken: DEBUG
-server:
-  port: 8086
-
----
-
-spring:
-  profiles: prod
-  datasource:
-    url: jdbc:mysql://localhost:3306/smartaddress?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: qinxiyue2006
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  logging:
-    level:
-      org.springframework: INFO
-      io.jsonwebtoken: INFO
-server:
-  port: 8080

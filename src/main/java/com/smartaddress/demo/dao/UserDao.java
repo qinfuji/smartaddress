@@ -7,13 +7,13 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface UserMapper {
+public interface UserDao {
 
     int deleteById(String id);
 
-    int insert(User record);
+    int save(User record);
 
-    int update(String id , User user);
+    int updateById(String id , User user);
 
-    List<User> findUser(UserQO qo);
+    List<User> queryUser(UserQO qo);
 }
