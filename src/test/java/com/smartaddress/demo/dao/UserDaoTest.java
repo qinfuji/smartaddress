@@ -61,10 +61,9 @@ public class UserDaoTest extends TestBase {
         List<User> userList = new ArrayList<>();
         for(int i=0; i<40; i++){
             User u = new User();
-            System.out.println(JMockData.mock(String.class));
-            u.setName(JMockData.mock(String.class));
+            u.setName(JMockData.mock(String.class,MOCK_CONFIG));
             u.setStatus(User.STATUS_NORMAL);
-            u.setPassword(JMockData.mock(String.class));
+            u.setPassword(JMockData.mock(String.class,MOCK_CONFIG));
             u.setId(UUID.randomUUID().toString());
             userList.add(u);
 
@@ -77,9 +76,9 @@ public class UserDaoTest extends TestBase {
         List<User> userList = new ArrayList<>();
         for(int i=0; i<20; i++){
             User u = new User();
-            u.setName(JMockData.mock(String.class));
+            u.setName(JMockData.mock(String.class ,MOCK_CONFIG));
             u.setStatus(User.STATUS_NORMAL);
-            u.setPassword(JMockData.mock(String.class));
+            u.setPassword(JMockData.mock(String.class,MOCK_CONFIG));
             u.setId(UUID.randomUUID().toString());
             userList.add(u);
 
