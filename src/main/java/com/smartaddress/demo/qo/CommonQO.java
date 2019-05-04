@@ -1,16 +1,26 @@
 package com.smartaddress.demo.qo;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.beans.Transient;
 
 /**
  * 通用查询对象
  */
 public class CommonQO {
+
+    /**
+     * 排序
+     */
     String orderBy;
-
-    private Integer pageNum = 1;
-
-    private Integer pageSize = 30;
+    /**
+     * 页号
+     */
+    private Integer pageNum;
+    /**
+     * 每页数量
+     */
+    private Integer pageSize;
 
     public String getOrderBy() {
         return orderBy;
@@ -35,4 +45,6 @@ public class CommonQO {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+
 }

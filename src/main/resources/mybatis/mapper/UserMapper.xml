@@ -22,14 +22,11 @@
   </insert>
 
   <insert id="batchSave">
-    <selectKey keyProperty="id" resultType="string" order="BEFORE">
-      select uuid() as id from dual
-    </selectKey>
     insert into user_t
     (<include refid="Base_Column_List"/>)
     values 
     <foreach collection="userList" item="item" index="index"  separator=",">
-      ( #{id , jdbcType=VARCHAR},
+      ( #{item.id , jdbcType=VARCHAR},
         #{item.name,jdbcType=VARCHAR},
         #{item.password,jdbcType=VARCHAR},
         #{item.status,jdbcType=VARCHAR})
@@ -59,15 +56,15 @@
   </update>
 
 
-  <select id="findAll" resultMap="BaseResultMap" >
+  <select id="queryAll" resultMap="BaseResultMap"  parameterType="com.smartaddress.demo.qo.UserQO">
     Select
     <include refid="Base_Column_List"/>
     from user_t where 1=1
-    <if test="qo != null and qo.name !=null and qo.name.length>0">
-       and name = ${qo.name}
+    <if test="name !=null and name.length>0">
+       and name = #{name}
     </if>
-    <if test="qo != null and qo.status !=null and qo.status.length>0">
-      and status = ${qo.status}
+    <if test="status !=null and status.length>0">
+      and status = #{status}
     </if>
   </select>
 

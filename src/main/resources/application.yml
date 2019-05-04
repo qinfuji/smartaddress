@@ -18,6 +18,10 @@ mybatis:
     default-fetch-size: 100
     default-statement-timeout: 30
 
+logging:
+  path: ${user.home}/logs/
+  config: classpath:logging-config.xml
+
 mapper:
   mappers:
     - tk.mybatis.mapper.common.Mapper
@@ -27,7 +31,7 @@ pagehelper:
   help-dialect: mysql
   reasonable: true
   supportMethodsArguments: true
-  params: count=countSql
+  params: count=countSql;pageNum=pageNum;pageSize=pageSize
 
 
 freemarker:

@@ -32,7 +32,7 @@ public interface UserDao extends Mapper<User> {
      * @param qo
      * @return
      */
-    List<User> findAll(@Param("qo") UserQO qo);
+    List<User>  queryAll(UserQO qo);
 
     /**
      * 批量创建用户
@@ -40,4 +40,6 @@ public interface UserDao extends Mapper<User> {
      * @return
      */
     int batchSave(@Param("userList") List<User> userList);
+
+
 }

@@ -28,16 +28,12 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
-  logging:
-    level:
-      org:
-        springframework: debug
-      io:
-        jsonwebtoken: INFO
-      com:
-        ibatis: debug
-        smartaddress:
-          dome:
-            dao: debug
+
+logging:
+  level:
+    com:
+      smartaddress:
+        demo:
+          dao: debug
 server:
   port: 8080
