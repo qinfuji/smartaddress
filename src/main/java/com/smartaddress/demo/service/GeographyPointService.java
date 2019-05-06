@@ -5,4 +5,5 @@ package com.smartaddress.demo.service;
  */
 public interface GeographyPointService {
 
+
 }

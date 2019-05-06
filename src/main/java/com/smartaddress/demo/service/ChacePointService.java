@@ -11,4 +11,10 @@ public interface ChacePointService {
     ChancePoint save(ChancePoint point);
 
 
+    /**
+     * 修改机会点
+     * @param point
+     * @return
+     */
+    ChancePoint update(ChancePoint point);
 }

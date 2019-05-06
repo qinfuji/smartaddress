@@ -1,21 +1,23 @@
 package com.smartaddress.demo.web.controller;
 
 
+import com.smartaddress.demo.service.AuthService;
+import com.smartaddress.demo.service.UserService;
 import com.smartaddress.demo.vo.AuthTokenObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthController {
 
+    @Autowired
+    AuthService authService;
 
-    @GetMapping("/login")
-    public Mono<AuthTokenObject> login(@RequestParam String username, @RequestParam String password) {
-        return null;
+    @PostMapping("/login")
+    public Mono<AuthTokenObject> login( String username,  String password) {
+         return null;
     }
 
 }
